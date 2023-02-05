@@ -14,26 +14,26 @@ class DataProcessing:
 
         # Store the relevant user choices and file names 
         self.files = {
-            "Consumer Price Index (Inflation)": "IRL_CPI.csv",
-            "Residential Property Prices": "IRL_Property.csv",
-            "Unemployment Rates": "IRL_Unemployment_Rate.csv"
+            "Consumer Price Index 💶": "IRL_CPI.csv",
+            "Residential Property Prices 🏠": "IRL_Property.csv",
+            "Unemployment Rates 📈": "IRL_Unemployment_Rate.csv"
         }
 
-
+        #self.df = pd.read_csv(f'{self.files.get(self.user_choice)}')
+    def read_data(self):
+        df = pd.read_csv(f'{self.files.get(self.user_choice)}')
+        return df 
+    
     def plot_data(self):
         """
-        Read the data from the csv files, and plot the on a line graph. 
+        Plot the read csv data on a graph. 
         """
-        # Read to dataframe 
-        df = pd.read_csv(f'{self.files.get(self.user_choice)}')
+        Timeframe = self.read_data()
+        Timeframe = Timeframe['Timeframe']
+        Eco_data = self.read_data() 
+        Eco_data = Eco_data['Data'] 
 
         # Plot line graph 
-        fig = px.line(x=df['Timeframe'],y=[df['Data']])
+        fig = px.line(x=Timeframe,y=Eco_data)
 
         return fig 
-
-
-
-        # Note: The graphs are all plotting on top of one another so you will need to fix that. 
-        # The graphs also need tidying up. 
-        # See if you can add a feature that will allow the user to zoom in and out on the graph. 
